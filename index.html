@@ -286,7 +286,12 @@ Object.keys(grupos).forEach(mes=>{
     lista.forEach((sem,index)=>{
 
 
-        let linha="<tr>";
+    let ultimaSemana = (index === lista.length - 1);
+
+
+    let linha = ultimaSemana
+    ? '<tr class="fim-mes">'
+    : '<tr>';
 
 
 
