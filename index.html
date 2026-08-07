@@ -228,19 +228,35 @@ let grupos={};
 semanas.forEach(s=>{
 
 
-    let diaAno=s.dias.find(d=>d.getFullYear()==2026);
+    let dias2026 = s.dias.filter(
+    d=>d.getFullYear()==2026
+);
 
 
-    if(!diaAno){
-        return;
-    }
+if(dias2026.length===0){
+    return;
+}
 
 
+let contagem={};
 
-    let mes=diaAno.toLocaleString(
+
+dias2026.forEach(d=>{
+
+    let nomeMes=d.toLocaleString(
         "pt-BR",
         {month:"long"}
     ).toUpperCase();
+
+
+    contagem[nomeMes]=(contagem[nomeMes]||0)+1;
+
+});
+
+
+let mes=Object.keys(contagem).reduce((a,b)=>
+    contagem[a] > contagem[b] ? a : b
+);
 
 
 
