@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Agenda Maribone</title>
+<title>Agenda Maribone 2026</title>
 
 <style>
 
@@ -11,7 +11,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
@@ -26,33 +26,18 @@ h1{
 table{
     width:100%;
     border-collapse:collapse;
-    background:#fff;
+    background:white;
 }
 
-th,td{
-    border:1px solid #dcdcdc;
-    padding:8px;
+th, td{
+    border:1px solid #ccc;
     text-align:center;
-    vertical-align:top;
 }
 
 th{
     background:#2c3e50;
-    color:#fff;
-}
-
-td{
-    height:60px;
-}
-
-tbody tr:hover{
-    background:#f7f9fc;
-}
-
-.semana{
-    width:55px;
-    font-weight:bold;
-    background:#fafafa;
+    color:white;
+    padding:10px;
 }
 
 .mes{
@@ -60,22 +45,76 @@ tbody tr:hover{
     writing-mode:vertical-rl;
     transform:rotate(180deg);
 
-    font-weight:bold;
-    letter-spacing:2px;
-
     background:#34495e;
     color:white;
+
+    font-weight:bold;
+    letter-spacing:2px;
 
     width:45px;
 
 }
 
+
+.semana{
+
+    width:55px;
+    font-weight:bold;
+    background:#eee;
+
+}
+
+
+.dia{
+
+    position:relative;
+
+    height:90px;
+    min-width:120px;
+
+    padding:8px;
+
+    vertical-align:top;
+
+}
+
+
+.anotacao{
+
+    width:100%;
+    height:70px;
+
+    outline:none;
+
+}
+
+
+.data{
+
+    position:absolute;
+
+    bottom:4px;
+    left:0;
+    right:0;
+
+    font-size:11px;
+
+    color:#777;
+
+    text-align:center;
+
+}
+
+
 </style>
 
 </head>
+
 <body>
 
+
 <h1>Agenda Maribone 2026</h1>
+
 
 <table>
 
@@ -97,111 +136,179 @@ tbody tr:hover{
 
 </thead>
 
+
 <tbody id="agenda"></tbody>
+
 
 </table>
 
+
+
 <script>
+
 
 const agenda = document.getElementById("agenda");
 
-const dataInicial = new Date(2025, 11, 29); // 29/12/2025
 
-let semanas = [];
+// Semana 01 começa em 29/12/2025
+const inicio = new Date(2025,11,29);
 
-for(let i = 0; i < 52; i++){
 
-    let inicioSemana = new Date(dataInicial);
+let semanas=[];
 
-    inicioSemana.setDate(dataInicial.getDate() + (i * 7));
 
-    let dias = [];
 
-    for(let d = 0; d < 7; d++){
+for(let i=0;i<52;i++){
 
-        let dia = new Date(inicioSemana);
 
-        dia.setDate(inicioSemana.getDate() + d);
+    let dias=[];
 
-        dias.push(dia);
+
+    for(let d=0;d<7;d++){
+
+        let data=new Date(inicio);
+
+        data.setDate(
+            inicio.getDate() + (i*7) + d
+        );
+
+
+        dias.push(data);
 
     }
 
+
+
     semanas.push({
+
         numero:i+1,
-        dias:dias,
-        mes:dias[0].toLocaleString("pt-BR",{month:"long"}).toUpperCase()
+        dias:dias
+
     });
+
 
 }
 
 
-// agrupa semanas pelo mês
 
-let grupos = {};
+// Agrupa pelo mês que pertence ao ano de 2026
+
+let grupos={};
+
+
 
 semanas.forEach(s=>{
 
-    if(!grupos[s.mes]){
-        grupos[s.mes] = [];
+
+    let diaAno=s.dias.find(d=>d.getFullYear()==2026);
+
+
+    if(!diaAno){
+        return;
     }
 
-    grupos[s.mes].push(s);
+
+
+    let mes=diaAno.toLocaleString(
+        "pt-BR",
+        {month:"long"}
+    ).toUpperCase();
+
+
+
+    if(!grupos[mes]){
+        grupos[mes]=[];
+    }
+
+
+    grupos[mes].push(s);
+
 
 });
 
 
-// cria tabela
+
+
+// Monta tabela
+
 
 Object.keys(grupos).forEach(mes=>{
 
-    let lista = grupos[mes];
+
+    let lista=grupos[mes];
 
 
-    lista.forEach((s,index)=>{
 
-        let linha = "<tr>";
+    lista.forEach((sem,index)=>{
 
 
-        if(index === 0){
+        let linha="<tr>";
 
-            linha += `
+
+
+        if(index===0){
+
+
+            linha+=`
+
             <td class="mes" rowspan="${lista.length}">
                 ${mes}
             </td>
+
             `;
+
 
         }
 
 
-        linha += `
+
+        linha+=`
+
         <td class="semana">
-            ${String(s.numero).padStart(2,"0")}
+            ${String(sem.numero).padStart(2,"0")}
         </td>
+
         `;
 
 
-        s.dias.forEach(dia=>{
 
-            let data = 
-            String(dia.getDate()).padStart(2,"0") 
-            + "/" +
-            String(dia.getMonth()+1).padStart(2,"0");
+        sem.dias.forEach(d=>{
 
 
-            linha += `
-            <td contenteditable="true">
-                ${data}
+            let data=
+
+            String(d.getDate()).padStart(2,"0")
+            +"/"+
+            String(d.getMonth()+1).padStart(2,"0");
+
+
+
+            linha+=`
+
+            <td class="dia">
+
+                <div 
+                class="anotacao"
+                contenteditable="true">
+                </div>
+
+
+                <span class="data">
+                    ${data}
+                </span>
+
             </td>
+
             `;
+
 
         });
 
 
-        linha += "</tr>";
 
+        linha+="</tr>";
 
-        agenda.innerHTML += linha;
+        agenda.innerHTML+=linha;
 
 
     });
@@ -210,7 +317,9 @@ Object.keys(grupos).forEach(mes=>{
 });
 
 
+
 </script>
+
 
 </body>
 </html>
