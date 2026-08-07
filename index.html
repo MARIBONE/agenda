@@ -328,7 +328,7 @@ Object.keys(grupos).forEach(mes=>{
 
         marcador=`
         <span class="marcador-hoje">
-        HOJE
+        
         </span>
         `;
 
@@ -338,7 +338,7 @@ Object.keys(grupos).forEach(mes=>{
 
     linha+=`
 
-    <td class="dia ${classeHoje}">
+   <td id="${classeHoje}" class="dia ${classeHoje}">
 
         <div 
         class="anotacao"
@@ -373,7 +373,18 @@ Object.keys(grupos).forEach(mes=>{
 
 });
 
+// Leva automaticamente para o dia atual
 
+const hoje = document.getElementById("hoje");
+
+if(hoje){
+
+    hoje.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+
+}
 
 </script>
 
