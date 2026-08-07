@@ -45,20 +45,13 @@ th{
     writing-mode:vertical-rl;
     transform:rotate(180deg);
 
-    background:#34495e;
-    color:white;
-
     font-weight:bold;
     letter-spacing:2px;
 
+    background:#34495e;
+    color:white;
+
     width:45px;
-
-}
-
-.mes.vazio{
-
-    background:white;
-    border-right:1px solid #ccc;
 
 }
 
@@ -283,22 +276,13 @@ Object.keys(grupos).forEach(mes=>{
 
     linha+=`
 
-    <td class="mes">
+    <td class="mes" rowspan="${lista.length}">
         ${mes}
     </td>
 
     `;
 
-}else{
-
-    linha+=`
-
-    <td class="mes vazio"></td>
-
-    `;
-
 }
-
         linha+=`
 
         <td class="semana">
