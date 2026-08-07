@@ -301,7 +301,9 @@ Object.keys(grupos).forEach(mes=>{
 
         linha += `
 
-<td class="mes">
+linha += `
+
+<td class="mes ${ultimaSemana ? "fechamento-mes" : ""}">
 
     ${index === Math.floor(lista.length/2) ? mes : ""}
 
