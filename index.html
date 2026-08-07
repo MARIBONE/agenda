@@ -105,7 +105,34 @@ th{
 
 }
 
+.hoje{
 
+    background:#fff3cd;
+
+    border:3px solid #ff9800 !important;
+
+}
+
+
+.hoje .data{
+
+    font-weight:bold;
+    color:#e65100;
+
+}
+
+
+.marcador-hoje{
+
+    font-size:10px;
+    font-weight:bold;
+
+    color:#e65100;
+
+    display:block;
+
+}
+    
 </style>
 
 </head>
@@ -275,34 +302,64 @@ Object.keys(grupos).forEach(mes=>{
         sem.dias.forEach(d=>{
 
 
-            let data=
+    let data=
 
-            String(d.getDate()).padStart(2,"0")
-            +"/"+
-            String(d.getMonth()+1).padStart(2,"0");
-
-
-
-            linha+=`
-
-            <td class="dia">
-
-                <div 
-                class="anotacao"
-                contenteditable="true">
-                </div>
+    String(d.getDate()).padStart(2,"0")
+    +"/"+
+    String(d.getMonth()+1).padStart(2,"0");
 
 
-                <span class="data">
-                    ${data}
-                </span>
-
-            </td>
-
-            `;
+    let hoje = new Date();
 
 
-        });
+    let classeHoje="";
+
+
+    let marcador="";
+
+
+    if(
+        d.getDate()===hoje.getDate() &&
+        d.getMonth()===hoje.getMonth() &&
+        d.getFullYear()===hoje.getFullYear()
+    ){
+
+        classeHoje="hoje";
+
+        marcador=`
+        <span class="marcador-hoje">
+        HOJE
+        </span>
+        `;
+
+    }
+
+
+
+    linha+=`
+
+    <td class="dia ${classeHoje}">
+
+        <div 
+        class="anotacao"
+        contenteditable="true">
+        </div>
+
+
+        ${marcador}
+
+
+        <span class="data">
+            ${data}
+        </span>
+
+
+    </td>
+
+    `;
+
+
+});
 
 
 
