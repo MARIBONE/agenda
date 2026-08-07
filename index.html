@@ -42,16 +42,18 @@ th{
 
 .mes{
 
-    writing-mode:vertical-rl;
-    transform:rotate(180deg);
-
-    font-weight:bold;
-    letter-spacing:2px;
+    width:45px;
 
     background:#34495e;
     color:white;
 
-    width:45px;
+    font-weight:bold;
+
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+
+    text-align:center;
+    vertical-align:middle;
 
 }
 
@@ -272,17 +274,15 @@ Object.keys(grupos).forEach(mes=>{
 
 
 
-        if(index===0){
+        linha += `
 
-    linha+=`
+<td class="mes">
 
-    <td class="mes" rowspan="${lista.length}">
-        ${mes}
-    </td>
+    ${index === Math.floor(lista.length/2) ? mes : ""}
 
-    `;
+</td>
 
-}
+`;
         linha+=`
 
         <td class="semana">
