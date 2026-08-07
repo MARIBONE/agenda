@@ -103,67 +103,112 @@ tbody tr:hover{
 
 <script>
 
-const meses=[
+const agenda = document.getElementById("agenda");
 
-["JANEIRO",4],
-["FEVEREIRO",4],
-["MARÇO",5],
-["ABRIL",4],
-["MAIO",4],
-["JUNHO",5],
-["JULHO",4],
-["AGOSTO",4],
-["SETEMBRO",5],
-["OUTUBRO",4],
-["NOVEMBRO",4],
-["DEZEMBRO",5]
+const dataInicial = new Date(2025, 11, 29); // 29/12/2025
 
-];
+let semanas = [];
 
-let semana=1;
+for(let i = 0; i < 52; i++){
 
-const agenda=document.getElementById("agenda");
+    let inicioSemana = new Date(dataInicial);
 
-meses.forEach(m=>{
+    inicioSemana.setDate(dataInicial.getDate() + (i * 7));
 
-    const nome=m[0];
-    const quantidade=m[1];
+    let dias = [];
 
-    for(let i=0;i<quantidade;i++){
+    for(let d = 0; d < 7; d++){
 
-        let html="<tr>";
+        let dia = new Date(inicioSemana);
 
-        if(i==0){
+        dia.setDate(inicioSemana.getDate() + d);
 
-            html+=`
-            <td class="mes" rowspan="${quantidade}">
-                ${nome}
+        dias.push(dia);
+
+    }
+
+    semanas.push({
+        numero:i+1,
+        dias:dias,
+        mes:dias[0].toLocaleString("pt-BR",{month:"long"}).toUpperCase()
+    });
+
+}
+
+
+// agrupa semanas pelo mês
+
+let grupos = {};
+
+semanas.forEach(s=>{
+
+    if(!grupos[s.mes]){
+        grupos[s.mes] = [];
+    }
+
+    grupos[s.mes].push(s);
+
+});
+
+
+// cria tabela
+
+Object.keys(grupos).forEach(mes=>{
+
+    let lista = grupos[mes];
+
+
+    lista.forEach((s,index)=>{
+
+        let linha = "<tr>";
+
+
+        if(index === 0){
+
+            linha += `
+            <td class="mes" rowspan="${lista.length}">
+                ${mes}
             </td>
             `;
 
         }
 
-        html+=`
-            <td class="semana">${String(semana).padStart(2,"0")}</td>
 
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-
-        </tr>
+        linha += `
+        <td class="semana">
+            ${String(s.numero).padStart(2,"0")}
+        </td>
         `;
 
-        agenda.innerHTML+=html;
 
-        semana++;
+        s.dias.forEach(dia=>{
 
-    }
+            let data = 
+            String(dia.getDate()).padStart(2,"0") 
+            + "/" +
+            String(dia.getMonth()+1).padStart(2,"0");
+
+
+            linha += `
+            <td contenteditable="true">
+                ${data}
+            </td>
+            `;
+
+        });
+
+
+        linha += "</tr>";
+
+
+        agenda.innerHTML += linha;
+
+
+    });
+
 
 });
+
 
 </script>
 
