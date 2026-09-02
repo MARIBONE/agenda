@@ -411,6 +411,51 @@ if(hoje){
 
 }
 
+    // ========================================
+// LOCALSTORAGE DA AGENDA
+// ========================================
+
+const anotacoes = document.querySelectorAll(".anotacao");
+
+
+// Carrega as anotações salvas
+anotacoes.forEach(anotacao => {
+
+    const dia = anotacao.closest(".dia");
+
+    const data = dia.dataset.data;
+
+    const salvo = localStorage.getItem(
+        "agenda_maribone_" + data
+    );
+
+    if (salvo !== null) {
+
+        anotacao.innerHTML = salvo;
+
+    }
+
+});
+
+
+// Salva automaticamente quando o usuário digita
+anotacoes.forEach(anotacao => {
+
+    anotacao.addEventListener("input", function(){
+
+        const dia = anotacao.closest(".dia");
+
+        const data = dia.dataset.data;
+
+        localStorage.setItem(
+            "agenda_maribone_" + data,
+            anotacao.innerHTML
+        );
+
+    });
+
+});
+
 </script>
 
 
