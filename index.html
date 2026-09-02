@@ -363,7 +363,7 @@ Object.keys(grupos).forEach(mes=>{
 
     linha+=`
 
-   <td id="${classeHoje}" class="dia ${classeHoje}">
+   <td id="${classeHoje}" class="dia ${classeHoje}" data-data="${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}">
 
         <div 
         class="anotacao"
