@@ -2,183 +2,176 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="google-site-verification" content="iJrEz_PAT2UyqJK8oxP3mkdpwd9j6w82uYT1WlbSZQA">
+<meta name="google-site-verification" content="iJrEz_PAT2UyqJK8oxP3mkdpwd9j6w82uYT1WlbSZQA" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="No celular, no carro, no relógio e na TV. Tecnologia de Alto Nível, seu sistema com a Raiz Maribone. Leve sua Marca mais longe!">
 <meta name="author" content="Æ Maribone Tecnologia">
-<meta name="generator" content="Æ Maribone Tecnologia">
-<meta name="robots" content="index, follow">
+<meta name="generator" content= "Æ Maribone Tecnologia">
+<meta name="robots" content="/index, follow">
 <meta name="keywords" content="Desenvolvimento de Sistemas, Licenciamento de Software, Design de Projetos. Seu sistema com a Raiz Maribone!">
-
 <title>Agenda Maribone 2026</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+
+    header {
+  background-size: 30%;
+  background-repeat: no-repeat;
+margin:1px; 
+border: 1px solid #a7a7a7;
+border-bottom: 1px solid #ffffff;
+box-sizing: border-box; 
+max-width: 100%;
+height: auto;
 }
 
-body {
-    background: #f4f4f4;
-    padding: 30px;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-header {
-    background-size: 30%;
-    background-repeat: no-repeat;
-    margin: 1px;
-    border: 1px solid #a7a7a7;
-    border-bottom: 1px solid #ffffff;
-    box-sizing: border-box;
-    max-width: 100%;
-    height: auto;
+body{
+    background:#f4f4f4;
+    padding:30px;
 }
 
-h1 {
-    margin-bottom: 20px;
+h1{
+    margin-bottom:20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #ffffff;
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
 }
 
+th, td{
+    border:1px solid #000000;
+    text-align:center;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+    padding:10px;
+}
+
+.mes{
+
+    width:45px;
+
+    background:#ffffff;
+    color:#000000;
+
+    font-weight:bold;
+
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+
+    text-align:center;
+    vertical-align:middle;
+
+}
+
+.fechamento-mes{
+
+    border-bottom:3px solid #dcdcdc;
+
+}
+
+.fim-mes td{
+    border-bottom:3px solid red;
+}
+
+.semana{
+
+    width:55px;
+    font-weight:bold;
+    background:#eee;
+
+}
+
+
+.dia{
+
+    position:relative;
+
+    height:90px;
+    min-width:120px;
+
+    padding:8px;
+
+    vertical-align:top;
+
+}
+
+
+.anotacao{
+
+    width:100%;
+    height:70px;
+
+    outline:none;
+
+}
+
+
+.data{
+
+    position:absolute;
+
+    bottom:4px;
+    left:0;
+    right:0;
+
+    font-size:11px;
+
+    color:#777;
+
+    text-align:center;
+
+}
+
+.hoje{
+
+    background:#fff3cd;
+
+    border:3px solid #ff9800 !important;
+
+}
+
+
+.hoje .data{
+
+    font-weight:bold;
+    color:#e65100;
+
+}
+
+
+.marcador-hoje{
+
+    font-size:10px;
+    font-weight:bold;
+
+    color:#e65100;
+
+    display:block;
+
+}
     
-
-th, td {
-    border: 2px solid #000000;
-    text-align: center;
-}
-
-th {
-    background: #2c3e50;
-    color: #ffffff;
-    padding: 10px;
-}
-
-/* Cabeçalho DOM */
-thead th:last-child {
-    background: #8b0000;
-}
-
-/* Coluna DOM: fundo rosado e grade preta */
-#agenda tr > td:nth-child(9) {
-    background-color: #fff0f0;
-
-    /* Reforça visualmente as quatro linhas de cada célula */
-    box-shadow:
-        inset 1px 0 0 #000000,
-        inset -1px 0 0 #000000,
-        inset 0 1px 0 #000000,
-        inset 0 -1px 0 #000000;
-}
-
-/* Mantém o destaque do dia atual */
-#agenda tr > td:nth-child(9).hoje {
-    background-color: #fff3cd;
-    border: 3px solid #ff9800 !important;
-    box-shadow: none;
-}
-
-.mes {
-    width: 45px;
-    background: #ffffff;
-    color: #000000;
-    font-weight: bold;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    text-align: center;
-    vertical-align: middle;
-}
-
-.fechamento-mes {
-    border-bottom: 3px solid #dcdcdc;
-}
-
-.fim-mes td {
-    border-bottom: 3px solid red;
-}
-
-.semana {
-    width: 55px;
-    font-weight: bold;
-    background: #eeeeee;
-}
-
-
-/* Mantém a coluna Semana fixa na rolagem horizontal */
-th:nth-child(2),
-td.semana {
-    position: sticky;
-    left: 0;
-    z-index: 5;
-}
-
-/* Fundo opaco para a coluna fixa */
-th:nth-child(2) {
-    background: #2c3e50;
-    z-index: 12;
-}
-
-td.semana {
-    background: #eeeeee;
-}
-
-
-.dia {
-    position: relative;
-    height: 90px;
-    min-width: 120px;
-    padding: 8px;
-    vertical-align: top;
-}
-
-.anotacao {
-    width: 100%;
-    height: 70px;
-    outline: none;
-}
-
-.data {
-    position: absolute;
-    bottom: 4px;
-    left: 0;
-    right: 0;
-    font-size: 11px;
-    color: #777777;
-    text-align: center;
-}
-
-.hoje {
-    background: #fff3cd;
-    border: 3px solid #ff9800 !important;
-}
-
-.hoje .data {
-    font-weight: bold;
-    color: #e65100;
-}
-
-.marcador-hoje {
-    font-size: 10px;
-    font-weight: bold;
-    color: #e65100;
-    display: block;
-}
 </style>
+
 </head>
 
 <body>
-
 <header style="display:flex; align-items:center; gap:30px; position:sticky; top:0; z-index:1000; background:#f4f4f4;">
 
     <a href="https://maribone.github.io/maribone">
-        <img
+        <img 
             src="https://lh7-us.googleusercontent.com/QXf3JP0Hqkn2WY2_aoz-PWQtenCJtb2gXCRS7D1nI3U5VhQmeKjm5_znfd0WeyuMNvHCZFFWgroFfCyEc0Oam7jBk17vrdmHu3Ee1ztuwHH9C7hVCHwvKGSreh7-ZZ6e4hsocPLMhwbtU3osLph3FcawbpnYFA"
-            alt="Maribone Tecnologia"
             style="width:30em; max-width:100%; height:auto; padding-top:1%;">
     </a>
 
@@ -187,175 +180,275 @@ td.semana {
     </h1>
 
 </header>
-
 <table>
-    <thead>
-        <tr>
-            <th></th>
-            <th>Sem</th>
-            <th>Seg</th>
-            <th>Ter</th>
-            <th>Qua</th>
-            <th>Qui</th>
-            <th>Sex</th>
-            <th>Sáb</th>
-            <th>Dom</th>
-        </tr>
-    </thead>
 
-    <tbody id="agenda"></tbody>
+<thead>
+
+<tr>
+
+<th></th>
+<th>Sem</th>
+<th>Seg</th>
+<th>Ter</th>
+<th>Qua</th>
+<th>Qui</th>
+<th>Sex</th>
+<th>Sáb</th>
+<th>Dom</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="agenda"></tbody>
+
+
 </table>
 
+
+
 <script>
+
+
 const agenda = document.getElementById("agenda");
 
+
 // Semana 01 começa em 29/12/2025
-const inicio = new Date(2025, 11, 29);
+const inicio = new Date(2025,11,29);
 
-let semanas = [];
 
-for (let i = 0; i < 52; i++) {
-    let dias = [];
+let semanas=[];
 
-    for (let d = 0; d < 7; d++) {
-        let data = new Date(inicio);
+
+
+for(let i=0;i<52;i++){
+
+
+    let dias=[];
+
+
+    for(let d=0;d<7;d++){
+
+        let data=new Date(inicio);
 
         data.setDate(
-            inicio.getDate() + (i * 7) + d
+            inicio.getDate() + (i*7) + d
         );
 
+
         dias.push(data);
+
     }
+
+
 
     semanas.push({
-        numero: i + 1,
-        dias: dias
+
+        numero:i+1,
+        dias:dias
+
     });
+
+
 }
 
-// Agrupa as semanas pelo mês predominante de 2026
-let grupos = {};
 
-semanas.forEach(s => {
+
+// Agrupa pelo mês que pertence ao ano de 2026
+
+let grupos={};
+
+
+
+semanas.forEach(s=>{
+
+
     let dias2026 = s.dias.filter(
-        d => d.getFullYear() === 2026
-    );
+    d=>d.getFullYear()==2026
+);
 
-    if (dias2026.length === 0) {
-        return;
-    }
 
-    let contagem = {};
+if(dias2026.length===0){
+    return;
+}
 
-    dias2026.forEach(d => {
-        let nomeMes = d.toLocaleString(
-            "pt-BR",
-            { month: "long" }
-        ).toUpperCase();
 
-        contagem[nomeMes] = (contagem[nomeMes] || 0) + 1;
-    });
+let contagem={};
 
-    let mes = Object.keys(contagem).reduce((a, b) =>
-        contagem[a] > contagem[b] ? a : b
-    );
 
-    if (!grupos[mes]) {
-        grupos[mes] = [];
-    }
+dias2026.forEach(d=>{
 
-    grupos[mes].push(s);
+    let nomeMes=d.toLocaleString(
+        "pt-BR",
+        {month:"long"}
+    ).toUpperCase();
+
+
+    contagem[nomeMes]=(contagem[nomeMes]||0)+1;
+
 });
 
-// Monta a tabela
-Object.keys(grupos).forEach(mes => {
-    let lista = grupos[mes];
 
-    lista.forEach((sem, index) => {
-        let ultimaSemana = index === lista.length - 1;
+let mes=Object.keys(contagem).reduce((a,b)=>
+    contagem[a] > contagem[b] ? a : b
+);
 
-        let linha = ultimaSemana
-            ? '<tr class="fim-mes">'
-            : '<tr>';
+
+
+    if(!grupos[mes]){
+        grupos[mes]=[];
+    }
+
+
+    grupos[mes].push(s);
+
+
+});
+
+
+
+
+// Monta tabela
+
+
+Object.keys(grupos).forEach(mes=>{
+
+
+    let lista=grupos[mes];
+
+
+
+    lista.forEach((sem,index)=>{
+
+
+    let ultimaSemana = (index === lista.length - 1);
+
+
+    let linha = ultimaSemana
+    ? '<tr class="fim-mes">'
+    : '<tr>';
+
+
 
         linha += `
-            <td class="mes ${ultimaSemana ? "fechamento-mes" : ""}">
-                ${index === Math.floor(lista.length / 2) ? mes : ""}
-            </td>
+
+<td class="mes ${ultimaSemana ? "fechamento-mes" : ""}">
+
+    ${index === Math.floor(lista.length/2) ? mes : ""}
+
+</td>
+
+`;
+        linha+=`
+
+        <td class="semana">
+            ${String(sem.numero).padStart(2,"0")}
+        </td>
+
         `;
 
-        linha += `
-            <td class="semana">
-                ${String(sem.numero).padStart(2, "0")}
-            </td>
+
+
+        sem.dias.forEach(d=>{
+
+
+    let data=
+
+    String(d.getDate()).padStart(2,"0")
+    +"/"+
+    String(d.getMonth()+1).padStart(2,"0");
+
+
+    let hoje = new Date();
+
+
+    let classeHoje="";
+
+
+    let marcador="";
+
+
+    if(
+        d.getDate()===hoje.getDate() &&
+        d.getMonth()===hoje.getMonth() &&
+        d.getFullYear()===hoje.getFullYear()
+    ){
+
+        classeHoje="hoje";
+
+        marcador=`
+        <span class="marcador-hoje">
+        
+        </span>
         `;
 
-        sem.dias.forEach(d => {
-            let data =
-                String(d.getDate()).padStart(2, "0") +
-                "/" +
-                String(d.getMonth() + 1).padStart(2, "0");
+    }
 
-            let hoje = new Date();
-            let classeHoje = "";
-            let marcador = "";
 
-            if (
-                d.getDate() === hoje.getDate() &&
-                d.getMonth() === hoje.getMonth() &&
-                d.getFullYear() === hoje.getFullYear()
-            ) {
-                classeHoje = "hoje";
 
-                marcador = `
-                    <span class="marcador-hoje"></span>
-                `;
-            }
+    linha+=`
 
-            let dataISO =
-                d.getFullYear() + "-" +
-                String(d.getMonth() + 1).padStart(2, "0") + "-" +
-                String(d.getDate()).padStart(2, "0");
+   <td id="${classeHoje}" class="dia ${classeHoje}" data-data="${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}">
 
-            linha += `
-                <td
-                    id="${classeHoje}"
-                    class="dia ${classeHoje}"
-                    data-data="${dataISO}">
+        <div 
+        class="anotacao"
+        contenteditable="true">
+        </div>
 
-                    <div class="anotacao" contenteditable="true"></div>
 
-                    ${marcador}
+        ${marcador}
 
-                    <span class="data">${data}</span>
-                </td>
-            `;
-        });
 
-        linha += "</tr>";
-        agenda.innerHTML += linha;
+        <span class="data">
+            ${data}
+        </span>
+
+
+    </td>
+
+    `;
+
+
+});
+
+
+
+        linha+="</tr>";
+
+        agenda.innerHTML+=linha;
+
+
     });
+
+
 });
 
 // Leva automaticamente para o dia atual
-const elementoHoje = document.getElementById("hoje");
 
-if (elementoHoje) {
-    elementoHoje.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
+const hoje = document.getElementById("hoje");
+
+if(hoje){
+
+    hoje.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
     });
+
 }
 
-// ========================================
+    // ========================================
 // LOCALSTORAGE DA AGENDA
 // ========================================
 
 const anotacoes = document.querySelectorAll(".anotacao");
 
+
 // Carrega as anotações salvas
 anotacoes.forEach(anotacao => {
+
     const dia = anotacao.closest(".dia");
+
     const data = dia.dataset.data;
 
     const salvo = localStorage.getItem(
@@ -363,25 +456,35 @@ anotacoes.forEach(anotacao => {
     );
 
     if (salvo !== null) {
+
         anotacao.innerHTML = salvo;
+
     }
+
 });
+
 
 // Salva automaticamente quando o usuário digita
 anotacoes.forEach(anotacao => {
-    anotacao.addEventListener("input", function() {
+
+    anotacao.addEventListener("input", function(){
+
         const dia = anotacao.closest(".dia");
+
         const data = dia.dataset.data;
 
         localStorage.setItem(
             "agenda_maribone_" + data,
             anotacao.innerHTML
         );
+
     });
+
 });
+
 </script>
 
-<script src="https://www.maribone.com.br/telemetria.js"></script>
+    <script src="https://www.maribone.com.br/telemetria.js"></script>
 
 </body>
 </html>
