@@ -59,21 +59,23 @@ th{
 }
 
 
+
 /* Cabeçalho DOM */
-th:last-child{
-    background:#8b0000;
+th:last-child {
+    background: #8b0000;
 }
 
-
-
-/* Coluna DOM: fundo colorido e linhas preservadas */
+/* Coluna DOM: fundo claro e grade preta */
 #agenda td:nth-child(9) {
     background-color: #fff0f0;
-    border: 1px solid #000000 !important;
-    border-right: 1px solid #000000 !important;
-    border-left: 1px solid #000000 !important;
+    border: 1px solid #000 !important;
 }
 
+/* Preserva as linhas horizontais da coluna DOM */
+#agenda tr td:nth-child(9) {
+    border-top: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+}
 
     
 .mes{
