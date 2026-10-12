@@ -158,6 +158,29 @@ th{
     display:block;
 
 }
+
+
+/* Rolagem horizontal da agenda */
+body {
+    overflow-x: auto;
+}
+
+/* Mantém a coluna Sem fixa */
+th:nth-child(2),
+td.semana {
+    position: sticky;
+    left: 45px;
+    z-index: 5;
+    background: #eeeeee;
+}
+
+/* Mantém o cabeçalho Sem legível */
+thead th:nth-child(2) {
+    background: #2c3e50;
+    color: #ffffff;
+    z-index: 10;
+}
+    
     
 </style>
 
