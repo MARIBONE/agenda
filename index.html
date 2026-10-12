@@ -106,6 +106,26 @@ thead th:last-child {
     background: #eeeeee;
 }
 
+
+/* Mantém a coluna Semana fixa na rolagem horizontal */
+th:nth-child(2),
+td.semana {
+    position: sticky;
+    left: 0;
+    z-index: 5;
+}
+
+/* Fundo opaco para a coluna fixa */
+th:nth-child(2) {
+    background: #2c3e50;
+    z-index: 12;
+}
+
+td.semana {
+    background: #eeeeee;
+}
+
+
 .dia {
     position: relative;
     height: 90px;
