@@ -9,7 +9,6 @@
 <meta name="generator" content="Æ Maribone Tecnologia">
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="Desenvolvimento de Sistemas, Licenciamento de Software, Design de Projetos. Seu sistema com a Raiz Maribone!">
-
 <title>Agenda Maribone 2026</title>
 
 <style>
@@ -31,30 +30,53 @@ header {
     margin: 1px;
     border: 1px solid #a7a7a7;
     border-bottom: 1px solid #ffffff;
-    box-sizing: border-box;
     max-width: 100%;
-    height: auto;
 }
 
 h1 {
     margin-bottom: 20px;
 }
 
+/* Área própria de rolagem horizontal */
+.tabela-container {
+    width: 100%;
+    overflow-x: auto;
+    position: relative;
+    isolation: isolate;
+}
+
+/* Tabela */
 table {
     width: 100%;
-    border-collapse: collapse;
+    min-width: 1050px;
+    border-collapse: separate;
+    border-spacing: 0;
     background: #ffffff;
 }
 
+/* Grade mais grossa */
 th, td {
-    border: 2px solid #000000;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
     text-align: center;
+}
+
+/* Primeira linha e primeira coluna da grade */
+thead th {
+    border-top: 2px solid #000000;
+}
+
+th:first-child,
+td:first-child {
+    border-left: 2px solid #000000;
 }
 
 th {
     background: #2c3e50;
     color: #ffffff;
     padding: 10px;
+    position: relative;
+    z-index: 2;
 }
 
 /* Cabeçalho DOM */
@@ -62,27 +84,10 @@ thead th:last-child {
     background: #8b0000;
 }
 
-/* Coluna DOM: fundo rosado e grade preta */
-#agenda tr > td:nth-child(9) {
-    background-color: #fff0f0;
-
-    /* Reforça visualmente as quatro linhas de cada célula */
-    box-shadow:
-        inset 1px 0 0 #000000,
-        inset -1px 0 0 #000000,
-        inset 0 1px 0 #000000,
-        inset 0 -1px 0 #000000;
-}
-
-/* Mantém o destaque do dia atual */
-#agenda tr > td:nth-child(9).hoje {
-    background-color: #fff3cd;
-    border: 3px solid #ff9800 !important;
-    box-shadow: none;
-}
-
+/* Coluna dos meses */
 .mes {
     width: 45px;
+    min-width: 45px;
     background: #ffffff;
     color: #000000;
     font-weight: bold;
@@ -92,6 +97,32 @@ thead th:last-child {
     vertical-align: middle;
 }
 
+/* Coluna Sem */
+.semana {
+    width: 55px;
+    min-width: 55px;
+    font-weight: bold;
+    background: #eeeeee;
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    background-clip: padding-box;
+}
+
+/* Canto do cabeçalho: fica acima da coluna fixa */
+thead th:nth-child(2) {
+    position: sticky;
+    left: 0;
+    z-index: 6;
+    background: #2c3e50;
+}
+
+/* Domingo: fundo rosado */
+#agenda td:nth-child(9) {
+    background-color: #fff0f0;
+}
+
+/* Fechamento dos meses */
 .fechamento-mes {
     border-bottom: 3px solid #dcdcdc;
 }
@@ -100,32 +131,7 @@ thead th:last-child {
     border-bottom: 3px solid red;
 }
 
-.semana {
-    width: 55px;
-    font-weight: bold;
-    background: #eeeeee;
-}
-
-
-/* Mantém a coluna Semana fixa na rolagem horizontal */
-th:nth-child(2),
-td.semana {
-    position: sticky;
-    left: 0;
-    z-index: 5;
-}
-
-/* Fundo opaco para a coluna fixa */
-th:nth-child(2) {
-    background: #2c3e50;
-    z-index: 12;
-}
-
-td.semana {
-    background: #eeeeee;
-}
-
-
+/* Células dos dias */
 .dia {
     position: relative;
     height: 90px;
@@ -134,12 +140,15 @@ td.semana {
     vertical-align: top;
 }
 
+/* Anotações */
 .anotacao {
     width: 100%;
     height: 70px;
     outline: none;
+    text-align: left;
 }
 
+/* Data no rodapé da célula */
 .data {
     position: absolute;
     bottom: 4px;
@@ -150,8 +159,9 @@ td.semana {
     text-align: center;
 }
 
+/* Dia atual */
 .hoje {
-    background: #fff3cd;
+    background: #fff3cd !important;
     border: 3px solid #ff9800 !important;
 }
 
@@ -165,6 +175,25 @@ td.semana {
     font-weight: bold;
     color: #e65100;
     display: block;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    header {
+        gap: 10px !important;
+    }
+
+    header img {
+        width: 120px !important;
+    }
+
+    header h1 {
+        font-size: 18px;
+    }
 }
 </style>
 </head>
@@ -180,73 +209,64 @@ td.semana {
             style="width:30em; max-width:100%; height:auto; padding-top:1%;">
     </a>
 
-    <h1 style="margin:0;">
-        Agenda Maribone 2026
-    </h1>
-
+    <h1 style="margin:0;">Agenda Maribone 2026</h1>
 </header>
 
-<table>
-    <thead>
-        <tr>
-            <th></th>
-            <th>Sem</th>
-            <th>Seg</th>
-            <th>Ter</th>
-            <th>Qua</th>
-            <th>Qui</th>
-            <th>Sex</th>
-            <th>Sáb</th>
-            <th>Dom</th>
-        </tr>
-    </thead>
-
-    <tbody id="agenda"></tbody>
-</table>
+<div class="tabela-container">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Sem</th>
+                <th>Seg</th>
+                <th>Ter</th>
+                <th>Qua</th>
+                <th>Qui</th>
+                <th>Sex</th>
+                <th>Sáb</th>
+                <th>Dom</th>
+            </tr>
+        </thead>
+        <tbody id="agenda"></tbody>
+    </table>
+</div>
 
 <script>
 const agenda = document.getElementById("agenda");
 
 // Semana 01 começa em 29/12/2025
 const inicio = new Date(2025, 11, 29);
-
-let semanas = [];
+const semanas = [];
 
 for (let i = 0; i < 52; i++) {
-    let dias = [];
+    const dias = [];
 
     for (let d = 0; d < 7; d++) {
-        let data = new Date(inicio);
-
-        data.setDate(
-            inicio.getDate() + (i * 7) + d
-        );
-
+        const data = new Date(inicio);
+        data.setDate(inicio.getDate() + (i * 7) + d);
         dias.push(data);
     }
 
     semanas.push({
         numero: i + 1,
-        dias: dias
+        dias
     });
 }
 
-// Agrupa as semanas pelo mês predominante de 2026
-let grupos = {};
+// Agrupa semanas pelo mês predominante em 2026
+const grupos = {};
 
 semanas.forEach(s => {
-    let dias2026 = s.dias.filter(
+    const dias2026 = s.dias.filter(
         d => d.getFullYear() === 2026
     );
 
-    if (dias2026.length === 0) {
-        return;
-    }
+    if (dias2026.length === 0) return;
 
-    let contagem = {};
+    const contagem = {};
 
     dias2026.forEach(d => {
-        let nomeMes = d.toLocaleString(
+        const nomeMes = d.toLocaleString(
             "pt-BR",
             { month: "long" }
         ).toUpperCase();
@@ -254,23 +274,20 @@ semanas.forEach(s => {
         contagem[nomeMes] = (contagem[nomeMes] || 0) + 1;
     });
 
-    let mes = Object.keys(contagem).reduce((a, b) =>
+    const mes = Object.keys(contagem).reduce((a, b) =>
         contagem[a] > contagem[b] ? a : b
     );
 
-    if (!grupos[mes]) {
-        grupos[mes] = [];
-    }
-
+    if (!grupos[mes]) grupos[mes] = [];
     grupos[mes].push(s);
 });
 
 // Monta a tabela
 Object.keys(grupos).forEach(mes => {
-    let lista = grupos[mes];
+    const lista = grupos[mes];
 
     lista.forEach((sem, index) => {
-        let ultimaSemana = index === lista.length - 1;
+        const ultimaSemana = index === lista.length - 1;
 
         let linha = ultimaSemana
             ? '<tr class="fim-mes">'
@@ -280,58 +297,60 @@ Object.keys(grupos).forEach(mes => {
             <td class="mes ${ultimaSemana ? "fechamento-mes" : ""}">
                 ${index === Math.floor(lista.length / 2) ? mes : ""}
             </td>
-        `;
-
-        linha += `
             <td class="semana">
                 ${String(sem.numero).padStart(2, "0")}
             </td>
         `;
 
         sem.dias.forEach(d => {
-            let data =
+            const data =
                 String(d.getDate()).padStart(2, "0") +
                 "/" +
                 String(d.getMonth() + 1).padStart(2, "0");
 
-            let hoje = new Date();
-            let classeHoje = "";
-            let marcador = "";
+            const hoje = new Date();
 
-            if (
+            const ehHoje =
                 d.getDate() === hoje.getDate() &&
                 d.getMonth() === hoje.getMonth() &&
-                d.getFullYear() === hoje.getFullYear()
-            ) {
-                classeHoje = "hoje";
+                d.getFullYear() === hoje.getFullYear();
 
-                marcador = `
-                    <span class="marcador-hoje"></span>
-                `;
-            }
+            const classeHoje = ehHoje ? "hoje" : "";
 
-            let dataISO =
+            const dataISO =
                 d.getFullYear() + "-" +
                 String(d.getMonth() + 1).padStart(2, "0") + "-" +
                 String(d.getDate()).padStart(2, "0");
 
             linha += `
                 <td
-                    id="${classeHoje}"
                     class="dia ${classeHoje}"
+                    ${ehHoje ? 'id="hoje"' : ""}
                     data-data="${dataISO}">
-
                     <div class="anotacao" contenteditable="true"></div>
-
-                    ${marcador}
-
                     <span class="data">${data}</span>
                 </td>
             `;
         });
 
         linha += "</tr>";
-        agenda.innerHTML += linha;
+        agenda.insertAdjacentHTML("beforeend", linha);
+    });
+});
+
+// Carrega anotações e salva alterações
+document.querySelectorAll(".anotacao").forEach(anotacao => {
+    const dia = anotacao.closest(".dia");
+    const data = dia.dataset.data;
+    const chave = "agenda_maribone_" + data;
+    const salvo = localStorage.getItem(chave);
+
+    if (salvo !== null) {
+        anotacao.innerHTML = salvo;
+    }
+
+    anotacao.addEventListener("input", () => {
+        localStorage.setItem(chave, anotacao.innerHTML);
     });
 });
 
@@ -341,42 +360,10 @@ const elementoHoje = document.getElementById("hoje");
 if (elementoHoje) {
     elementoHoje.scrollIntoView({
         behavior: "smooth",
-        block: "center"
+        block: "center",
+        inline: "nearest"
     });
 }
-
-// ========================================
-// LOCALSTORAGE DA AGENDA
-// ========================================
-
-const anotacoes = document.querySelectorAll(".anotacao");
-
-// Carrega as anotações salvas
-anotacoes.forEach(anotacao => {
-    const dia = anotacao.closest(".dia");
-    const data = dia.dataset.data;
-
-    const salvo = localStorage.getItem(
-        "agenda_maribone_" + data
-    );
-
-    if (salvo !== null) {
-        anotacao.innerHTML = salvo;
-    }
-});
-
-// Salva automaticamente quando o usuário digita
-anotacoes.forEach(anotacao => {
-    anotacao.addEventListener("input", function() {
-        const dia = anotacao.closest(".dia");
-        const data = dia.dataset.data;
-
-        localStorage.setItem(
-            "agenda_maribone_" + data,
-            anotacao.innerHTML
-        );
-    });
-});
 </script>
 
 <script src="https://www.maribone.com.br/telemetria.js"></script>
