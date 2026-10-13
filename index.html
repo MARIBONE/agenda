@@ -140,15 +140,13 @@ th{
 }
 
 @keyframes piscar {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
+    0% { opacity: 1; background-color: #2ecc71; color: white; }
+    50% { opacity: 0.3; background-color: #2ecc71; color: white; }
+    100% { opacity: 1; background-color: #2ecc71; color: white; }
 }
 
 .semana-atual {
-    background-color: #2ecc71 !important;
-    color: white !important;
-    animation: piscar 1s infinite; /* Faz piscar infinitamente */
+    animation: piscar 1s infinite !important;
 }
     
 </style>
@@ -226,6 +224,19 @@ semanas.forEach(s => {
     grupos[mes].push(s);
 });
 
+// Descobre o número da semana atual do ano automaticamente
+function obterSemanaAtual(d) {
+    let target = new Date(d.valueOf());
+    let dayNr = (d.getDay() + 6) % 7;
+    target.setDate(target.getDate() - dayNr + 3);
+    let firstThursday = new Date(target.getFullYear(), 0, 4);
+    let firstDayNr = (firstThursday.getDay() + 6) % 7;
+    firstThursday.setDate(firstThursday.getDate() - firstDayNr + 3);
+    let ds = target.getTime() - firstThursday.getTime();
+    return Math.floor(ds / (7 * 24 * 60 * 60 * 1000)) + 1;
+}
+let numSemanaAtual = obterSemanaAtual(new Date());
+    
 // Monta tabela com rowspan dinâmico
 Object.keys(grupos).forEach(mes => {
     let lista = grupos[mes];
