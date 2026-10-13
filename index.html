@@ -240,7 +240,7 @@ Object.keys(grupos).forEach(mes => {
         // ... restante do código da linha dos dias ...
 
         
-        sem.dias.forEach(d => {
+       sem.dias.forEach(d => {
             let data = String(d.getDate()).padStart(2, "0") + "/" + String(d.getMonth() + 1).padStart(2, "0");
             let hojeRef = new Date();
             let classeHoje = "";
@@ -257,8 +257,14 @@ Object.keys(grupos).forEach(mes => {
 
             let idAtributo = (classeHoje === "hoje") ? 'id="hoje"' : '';
 
+            // Adiciona a cor de fundo se o dia for Domingo (getDay() === 0)
+            let estiloDomingo = "";
+            if (d.getDay() === 0) {
+                estiloDomingo = 'style="background-color: #fce8e6;"';
+            }
+
             linha += `
-            <td ${idAtributo} class="dia ${classeHoje}" data-data="${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}">
+            <td ${idAtributo} ${estiloDomingo} class="dia ${classeHoje}" data-data="${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}">
                 <div class="anotacao" contenteditable="true"></div>
                 ${marcador}
                 <span class="data">${data}</span>
