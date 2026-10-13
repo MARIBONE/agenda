@@ -139,6 +139,17 @@ th{
     background-color: #fce8e6; /* Um tom avermelhado suave, por exemplo */
 }
 
+@keyframes piscar {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.semana-atual {
+    background-color: #2ecc71 !important;
+    color: white !important;
+    animation: piscar 1s infinite; /* Faz piscar infinitamente */
+}
     
 </style>
 
@@ -316,6 +327,15 @@ anotacoes.forEach(anotacao => {
         );
     });
 });
+
+let ehSemanaAtual = (sem.numero === 42) ? "semana-atual" : "";
+
+linha += `
+<td class="semana ${ehSemanaAtual}">
+    ${String(sem.numero).padStart(2, "0")}
+</td>
+`;
+    
 </script>
 
 <script src="https://www.maribone.com.br/telemetria.js"></script>
