@@ -46,6 +46,13 @@ table{
     background: white;
 }   
 
+/* Deixa o cabeçalho da tabela fixo junto ao topo logo abaixo do header */
+thead tr th {
+    position: sticky;
+    top: 65px; /* Ajuste a altura caso o seu header seja mais alto/baixo */
+    z-index: 999;
+}
+
 th, td{
     border: 2px solid #000000;
     text-align: center;
@@ -233,7 +240,6 @@ Object.keys(grupos).forEach(mes => {
                 marcador = `<span class="marcador-hoje"></span>`;
             }
 
-            // Atribui o id="hoje" unicamente na célula correspondente
             let idAtributo = (classeHoje === "hoje") ? 'id="hoje"' : '';
 
             linha += `
