@@ -33,23 +33,31 @@ header {
 body{
     background: #f4f4f4;
     padding: 3px;
-    overflow-x: auto;
 }
 
 h1{
     margin-bottom: 10px;
 }
+
+/* Container que permite a rolagem horizontal/vertical da tabela */
+.table-container {
+    width: 100%;
+    max-height: 85vh;
+    overflow: auto;
+    background: white;
+    border: 1px solid #ccc;
+}
     
 table{
-    width: calc(100% - 20px);
+    width: 100%;
     border-collapse: collapse;
     background: white;
 }   
 
-/* Deixa o cabeçalho da tabela fixo junto ao topo logo abaixo do header */
+/* Cabeçalho fixo empurrado para baixo na altura exata do header principal */
 thead tr th {
     position: sticky;
-    top: 65px; /* Ajuste a altura caso o seu header seja mais alto/baixo */
+    top: 95px; /* Altura ajustada para não ficar coberto pelo header */
     z-index: 999;
 }
 
@@ -135,7 +143,7 @@ th{
 </head>
 
 <body>
-<header style="display:flex; align-items:center; gap:30px; position:sticky; top:0; z-index:1000; background:#ffffff;">
+<header style="display:flex; align-items:center; gap:30px; position:sticky; top:0; z-index:1000; background:#ffffff; padding: 10px;">
     <a href="https://maribone.github.io/maribone">
         <img src="https://lh7-us.googleusercontent.com/QXf3JP0Hqkn2WY2_aoz-PWQtenCJtb2gXCRS7D1nI3U5VhQmeKjm5_znfd0WeyuMNvHCZFFWgroFfCyEc0Oam7jBk17vrdmHu3Ee1ztuwHH9C7hVCHwvKGSreh7-ZZ6e4hsocPLMhwbtU3osLph3FcawbpnYFA"
              style="width:25em; max-width:100%; height:auto; padding-top:1%;">
@@ -143,22 +151,24 @@ th{
     <h1 style="margin:0;">Agenda Maribone 2026</h1>
 </header>
     
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Sem</th>
-<th>SEG</th>
-<th>TER</th>
-<th>QUA</th>
-<th>QUI</th>
-<th>SEX</th>
-<th>SAB</th>
-<th>DOM</th>
-</tr>
-</thead>
-<tbody id="agenda"></tbody>
-</table>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Sem</th>
+                <th>SEG</th>
+                <th>TER</th>
+                <th>QUA</th>
+                <th>QUI</th>
+                <th>SEX</th>
+                <th>SAB</th>
+                <th>DOM</th>
+            </tr>
+        </thead>
+        <tbody id="agenda"></tbody>
+    </table>
+</div>
 
 <script>
 const agenda = document.getElementById("agenda");
