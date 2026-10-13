@@ -33,7 +33,7 @@ header {
 body{
     background: #f4f4f4;
     padding: 3px;
-    overflow-x: auto; /* Rolagem horizontal natural da página inteira */
+    overflow-x: auto;
 }
 
 h1{
@@ -46,10 +46,9 @@ table{
     background: white;
 }   
 
-/* Cabeçalho fixo grudado logo abaixo do header principal */
 thead th {
     position: sticky;
-    top: 125px; /* Altura do seu header fixo no topo */
+    top: 125px;
     z-index: 999;
     background: #2c3e50 !important;
     color: white;
@@ -75,7 +74,7 @@ th{
     transform: rotate(180deg);
     text-align: center;
     vertical-align: middle;
-    font-size: 32px
+    font-size: 32px;
 }
 
 .fechamento-mes{
@@ -134,11 +133,6 @@ th{
     display: block;
 }
 
-/* Pinta todo o fundo da coluna DOM (último elemento dia de cada linha) */
-.dia:nth-child(9) {
-    background-color: #fce8e6; /* Um tom avermelhado suave, por exemplo */
-}
-
 @keyframes piscar {
     0% { opacity: 1; background-color: #2ecc71; color: white; }
     50% { opacity: 0.3; background-color: #2ecc71; color: white; }
@@ -148,7 +142,6 @@ th{
 .semana-atual {
     animation: piscar 1s infinite !important;
 }
-    
 </style>
 
 </head>
@@ -223,19 +216,6 @@ semanas.forEach(s => {
     }
     grupos[mes].push(s);
 });
-
-// Descobre o número da semana atual do ano automaticamente
-function obterSemanaAtual(d) {
-    let target = new Date(d.valueOf());
-    let dayNr = (d.getDay() + 6) % 7;
-    target.setDate(target.getDate() - dayNr + 3);
-    let firstThursday = new Date(target.getFullYear(), 0, 4);
-    let firstDayNr = (firstThursday.getDay() + 6) % 7;
-    firstThursday.setDate(firstThursday.getDate() - firstDayNr + 3);
-    let ds = target.getTime() - firstThursday.getTime();
-    return Math.floor(ds / (7 * 24 * 60 * 60 * 1000)) + 1;
-}
-let numSemanaAtual = obterSemanaAtual(new Date());
     
 // Monta tabela com rowspan dinâmico
 Object.keys(grupos).forEach(mes => {
@@ -254,17 +234,23 @@ Object.keys(grupos).forEach(mes => {
             `;
         }
 
+        // Descobre se esta semana contém o dia de hoje para piscar
+        let hojeRef = new Date();
+        let contemHoje = sem.dias.some(d => 
+            d.getDate() === hojeRef.getDate() &&
+            d.getMonth() === hojeRef.getMonth() &&
+            d.getFullYear() === hojeRef.getFullYear()
+        );
+        let classeSemanaAtual = contemHoje ? "semana-atual" : "";
+
         linha += `
-        <td class="semana">
+        <td class="semana ${classeSemanaAtual}">
             ${String(sem.numero).padStart(2, "0")}
         </td>
         `;
-        // ... restante do código da linha dos dias ...
 
-        
-       sem.dias.forEach(d => {
+        sem.dias.forEach(d => {
             let data = String(d.getDate()).padStart(2, "0") + "/" + String(d.getMonth() + 1).padStart(2, "0");
-            let hojeRef = new Date();
             let classeHoje = "";
             let marcador = "";
 
@@ -279,7 +265,6 @@ Object.keys(grupos).forEach(mes => {
 
             let idAtributo = (classeHoje === "hoje") ? 'id="hoje"' : '';
 
-            // Adiciona a cor de fundo se o dia for Domingo (getDay() === 0)
             let estiloDomingo = "";
             if (d.getDay() === 0) {
                 estiloDomingo = 'style="background-color: #fce8e6;"';
@@ -316,7 +301,6 @@ setTimeout(() => {
 // ========================================
 const anotacoes = document.querySelectorAll(".anotacao");
 
-// Carrega as anotações salvas
 anotacoes.forEach(anotacao => {
     const dia = anotacao.closest(".dia");
     const data = dia.dataset.data;
@@ -327,7 +311,6 @@ anotacoes.forEach(anotacao => {
     }
 });
 
-// Salva automaticamente quando o usuário digita
 anotacoes.forEach(anotacao => {
     anotacao.addEventListener("input", function(){
         const dia = anotacao.closest(".dia");
@@ -338,15 +321,6 @@ anotacoes.forEach(anotacao => {
         );
     });
 });
-
-let ehSemanaAtual = (sem.numero === 42) ? "semana-atual" : "";
-
-linha += `
-<td class="semana ${ehSemanaAtual}">
-    ${String(sem.numero).padStart(2, "0")}
-</td>
-`;
-    
 </script>
 
 <script src="https://www.maribone.com.br/telemetria.js"></script>
