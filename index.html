@@ -215,26 +215,31 @@ semanas.forEach(s => {
     grupos[mes].push(s);
 });
 
-// Monta tabela
+// Monta tabela com rowspan dinâmico
 Object.keys(grupos).forEach(mes => {
     let lista = grupos[mes];
+    let totalSemanasMes = lista.length;
 
     lista.forEach((sem, index) => {
         let ultimaSemana = (index === lista.length - 1);
         let linha = ultimaSemana ? '<tr class="fim-mes">' : '<tr>';
 
-        linha += `
-        <td class="mes ${ultimaSemana ? "fechamento-mes" : ""}">
-            ${index === Math.floor(lista.length / 2) ? mes : ""}
-        </td>
-        `;
+        if (index === 0) {
+            linha += `
+            <td class="mes ${ultimaSemana ? "fechamento-mes" : ""}" rowspan="${totalSemanasMes}">
+                ${mes}
+            </td>
+            `;
+        }
 
         linha += `
         <td class="semana">
             ${String(sem.numero).padStart(2, "0")}
         </td>
         `;
+        // ... restante do código da linha dos dias ...
 
+        
         sem.dias.forEach(d => {
             let data = String(d.getDate()).padStart(2, "0") + "/" + String(d.getMonth() + 1).padStart(2, "0");
             let hojeRef = new Date();
