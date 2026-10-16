@@ -44,7 +44,6 @@ table{
     width: calc(100% - 20px);
     border-collapse: collapse;
     background: white;
-    /* Removido o table-layout: fixed global para preservar o mês */
 }   
 
 thead th {
@@ -105,7 +104,7 @@ th{
     max-width: 120px;
     padding: 8px;
     vertical-align: top;
-    overflow: hidden; /* Mantém o conteúdo contido */
+    overflow: hidden;
 }
 
 .anotacao{
@@ -113,9 +112,9 @@ th{
     height: 70px;
     outline: none;
     resize: none;
-    white-space: nowrap;      /* Impede que o texto quebre para baixo */
-    overflow: hidden;         /* Esconde o excesso */
-    text-overflow: ellipsis;  /* Adiciona os três pontinhos (...) */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .data{
@@ -127,7 +126,7 @@ th{
     color: #666666;
     font-weight: bold;
     text-align: center;
-    background: inherit; /* Garante que a data não fique transparente sobre o fundo */
+    background: inherit;
 }
 
 .hoje{
@@ -287,19 +286,23 @@ Object.keys(grupos).forEach(mes => {
             let idAtributo = (classeHoje === "hoje") ? 'id="hoje"' : '';
 
             let classeDomingo = "";
-if (d.getDay() === 0) {
-    classeDomingo = "domingo-celula";
-}
+            if (d.getDay() === 0) {
+                classeDomingo = "domingo-celula";
+            }
 
             linha += `
-<td ${idAtributo} class="dia ${classeHoje} ${classeDomingo}" data-data="${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}">
-    <div class="anotacao" contenteditable="true"></div>
-    ${marcador}
-    <span class="data">${data}</span>
-</td>
-`;
+            <td ${idAtributo} class="dia ${classeHoje} ${classeDomingo}" data-data="${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}">
+                <div class="anotacao" contenteditable="true"></div>
+                ${marcador}
+                <span class="data">${data}</span>
+            </td>
+            `;
+        });
 
-        
+        linha += "</tr>";
+        agenda.innerHTML += linha;
+    });
+});
 
 // Leva automaticamente para o dia atual após o carregamento completo
 setTimeout(() => {
