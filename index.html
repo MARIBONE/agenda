@@ -44,7 +44,7 @@ table{
     width: calc(100% - 20px);
     border-collapse: collapse;
     background: white;
-    table-layout: fixed;
+    /* Removido o table-layout: fixed global para preservar o mês */
 }   
 
 thead th {
@@ -68,6 +68,8 @@ th{
 
 .mes{
     width: 45px;
+    min-width: 45px;
+    max-width: 45px;
     background: #008ac3;
     color: #ffffff;
     font-weight: bold;
@@ -88,6 +90,8 @@ th{
 
 .semana{
     width: 55px;
+    min-width: 55px;
+    max-width: 55px;
     font-weight: bold;
     background: #eee;
 }
@@ -95,11 +99,13 @@ th{
 .dia{
     position: relative;
     height: 90px;
+    max-height: 90px;
+    width: 120px;
     min-width: 120px;
+    max-width: 120px;
     padding: 8px;
     vertical-align: top;
-    overflow: hidden; /* Esconde o que passar do limite */
-    word-break: break-all;
+    overflow: hidden; /* Mantém o conteúdo contido */
 }
 
 .anotacao{
@@ -107,7 +113,9 @@ th{
     height: 70px;
     outline: none;
     resize: none;
-    text-overflow: ellipsis;
+    white-space: nowrap;      /* Impede que o texto quebre para baixo */
+    overflow: hidden;         /* Esconde o excesso */
+    text-overflow: ellipsis;  /* Adiciona os três pontinhos (...) */
 }
 
 .data{
@@ -119,6 +127,7 @@ th{
     color: #000000;
     font-weight: bold;
     text-align: center;
+    background: inherit; /* Garante que a data não fique transparente sobre o fundo */
 }
 
 .hoje{
