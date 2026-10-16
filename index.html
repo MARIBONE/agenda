@@ -156,6 +156,13 @@ th{
 .semana-atual {
     animation: piscar 1s infinite !important;
 }
+
+.domingo-celula {
+    background-color: #fce8e6 !important;
+    border-top: 2px solid #000000 !important;
+    border-bottom: 2px solid #000000 !important;
+    border-right: 2px solid #000000 !important;
+}    
 </style>
 
 </head>
@@ -279,20 +286,18 @@ Object.keys(grupos).forEach(mes => {
 
             let idAtributo = (classeHoje === "hoje") ? 'id="hoje"' : '';
 
-            // Adiciona a cor de fundo e força as bordas no Domingo (getDay() === 0)
-            let estiloDomingo = "";
-            if (d.getDay() === 0) {
-            estiloDomingo = 'style="background-color: #fce8e6; border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-right: 2px solid #000000;"';
+            let classeDomingo = "";
+if (d.getDay() === 0) {
+    classeDomingo = "domingo-celula";
 }
 
             linha += `
-            <td ${idAtributo} ${estiloDomingo} class="dia ${classeHoje}" data-data="${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}">
-                <div class="anotacao" contenteditable="true"></div>
-                ${marcador}
-                <span class="data">${data}</span>
-            </td>
-            `;
-        });
+<td ${idAtributo} class="dia ${classeHoje} ${classeDomingo}" data-data="${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}">
+    <div class="anotacao" contenteditable="true"></div>
+    ${marcador}
+    <span class="data">${data}</span>
+</td>
+`;
 
         linha += "</tr>";
         agenda.innerHTML += linha;
