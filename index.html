@@ -112,9 +112,11 @@ th{
     height: 70px;
     outline: none;
     resize: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap;      /* Impede que o texto quebre para baixo */
+    overflow: hidden;         /* Esconde o excesso */
+    text-overflow: ellipsis;  /* Adiciona os três pontinhos (...) */
+    text-transform: uppercase; /* Deixa tudo em letras maiúsculas automaticamente */
+    font-weight: bold;        /* Deixa tudo em negrito (bold) */
 }
 
 .data{
