@@ -134,7 +134,7 @@ th{
 .hoje{
     background: #ffff00;
     border: 3px solid #000000 !important;
-    animation: piscar 1s infinite !important; /* Faz o dia atual piscar */
+    animation: piscar-hoje 1s infinite !important; /* Faz o dia atual piscar */
 }
 
 .hoje .data{
@@ -175,6 +175,12 @@ th{
 .domingo-celula .anotacao {
     color: #ffffff !important;
 }
+
+@keyframes piscar-hoje {
+    0% { opacity: 1; background-color: #ffffff; color: #000000; }
+    50% { opacity: 0.4; background-color: #fff3cd; color: #000000; }
+    100% { opacity: 1; background-color: #ffff00; color: #000000; }
+}    
 </style>
 
 </head>
